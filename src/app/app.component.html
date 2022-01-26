@@ -1,4 +1,52 @@
-<hello name="{{ name }}"></hello>
-<p>
-  Start editing to see some magic happen :)
-</p>
+<h1>{{titolo}}</h1>
+<!-- Binding unidirezionale componente view
+<input type="text" [ngModel]="nome"/> &nbsp;
+<!-- Binding unidirezionale view componente -->
+<!-- <input #rif_nome type="text" placeholder="Inserisci un nuovo nome" (input)="salvaNome(rif_nome.value)"/>
+<br>
+<button (click)="aggiornaNome()">Aggiorna nome</button>&nbsp;
+<button (click)="cancellaNome()">Cancella nome</button>
+<hr> -->
+<!-- Binding bidirezionale componente view -->
+<!-- <input type="text" placeholder="Inserisci un nome" [(ngModel)]="nomeBis"/>
+<br>
+<button (click)="aggiornaNomeBis()">Aggiorna nome bis</button>&nbsp;
+<button (click)="cancellaNomeBis()">Cancella nome bis</button>
+<br>
+<p>Contenuto campo: {{nomeBis}}</p>
+<hr>
+<h1>Persona</h1>
+<input type="text" [ngModel]="persona.id"/><br>
+<input type="text" [ngModel]="persona.nome"/><br>
+<input type="text" [ngModel]="persona.cognome"/><br>
+<input type="text" [ngModel]="persona.sessoStr"/><br>
+<button (click)="aggiornaPersona()">Aggiorna persona</button>
+<button (click)="cancellaPersona()">Cancella persona</button><br>
+ID: {{persona.id}}<br>
+Nome: {{persona.nome}}<br>
+Cognome: {{persona.cognome}}<br>
+Sesso: {{persona.sessoStr}}
+<hr> -->
+<h1>Inserimento persone</h1>
+<input type="text" placeholder="Inserire Id" [(ngModel)]="persona.id" (input)="attivaPulsanteInserimento()" [disabled]="campi" #idCampo/><br>
+<input type="text" placeholder="Inserire nome"[(ngModel)]="persona.nome" [disabled]="campi" #nomeCampo/><br>
+<input type="text" placeholder="Inserire cognome"[(ngModel)]="persona.cognome" [disabled]="campi"/><br>
+<!--<input type="text" placeholder="Inserire sesso"[(ngModel)]="persona.sessoStr"/><br>-->
+Maschio <input type="radio" name="sesso" [value]="true" [(ngModel)]="persona.sesso" (input)="persona.setSesso(true)" [disabled]="campi"/>
+Femmina <input type="radio" name="sesso" [value]="false" [(ngModel)]="persona.sesso" (input)="persona.setSesso(false)" [disabled]="campi"/><br>
+
+<div *ngIf="!modifica">
+  <button (click)="aggiungiPersona()" [disabled]="!attivaInserimento">Inserimento</button>
+  <button (click)="resetPersona()">Reset</button><br>
+</div>
+<div *ngIf="modifica">
+  <button (click)="confermaModificaPersona()">Modifica</button>
+  <button (click)="annullaModificaPersona()">Annulla</button><br>
+  </div>
+<hr>
+Elenco persone: 
+<div *ngFor="let personaObj of listaPersone;">
+  ID: {{personaObj.id}} | Nome: {{personaObj.nome}} | Cognome: {{personaObj.cognome}} | Sesso: {{personaObj.sessoStr}} <button [disabled]="pulsanti" (click)="dettaglioPersona(personaObj.id)">Dettaglio</button> &nbsp; <button (click)="modificaPersona(personaObj.id)" [disabled]="pulsanti">Modifica</button> &nbsp; <button (click)="rimuoviPersona(personaObj.id)" [disabled]="pulsanti">Cancella</button>
+</div>
+
+
